@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  master:
+    build:
+      context: ..
+      dockerfile: dockerfiles/Dockerfile
+      args:
+        USER: ${dUSER}
+        GROUP: ${dGROUP}
+        UID: ${dUID}
+        GID: ${dGID}
+    image: leonardoedgar/realtime-master
+    container_name: master
+    network_mode: "host"
+    environment:
+      - DISPLAY=unix$DISPLAY
+    shm_size: 256M
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ../:/home/${dUSER}/
+    stop_signal: SIGINT
+    command: sleep infinity
