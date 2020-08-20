@@ -57,5 +57,5 @@ jobs:
         run: |
           cd dockerfiles
           docker-compose -f docker-compose-dev.yaml up -d master
-          docker exec master /bin/bash -c "mkdir build; cd build; cmake ..; make all; ./tests/run_unit_tests"
+          docker exec master /bin/bash -c "mkdir build && cd build && cmake .. && make all && ./tests/run_unit_tests"
           docker-compose -f docker-compose-dev.yaml down
