@@ -1,43 +1,61 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Continuous Integration (CI)
+
+env:
+  dUSER: leonardo
+  dGROUP: leonardo
+  dUID: 1001
+  dGID: 116
+  VERSION: ci
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [ master develop]
   pull_request:
-    branches: [ master develop]
+    branches: 
+    - master 
+    - develop
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-18.04
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
     # Runs a single command using the runners shell
+    - name: Pull dependent repositories
+      run: cd dockerfiles && ./update-sourcecode.sh 
     - name: Build development docker image
-      run: cd dockerfiles && docker-compose -f docker-compose.yaml build
-    
-    # Push development docker image
-    - name: Push development docker image
-      run: docker push leonardoedgar/realtime:master-latest
+      run: cd dockerfiles && docker-compose -f docker-compose-dev.yaml build
+    - name: Save docker image
+      run: docker save -o dev-image leonardoedgar/realtime:master-${VERSION}
+    - name: Upload development docker image
+      uses: actions/upload-artifact@v2
+      with:
+        name: dev-image
+        path: ./dev-image
   
   unit_tests:
-    runs-on: ubuntu-latest
-    container: leonardoedgar/realtime:master-latest
+    needs: [build]
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Generate makefiles
-        run: mkdir build && cd built && cmake ..
-      - name: Generate executables
-        run: cd build && make all
+      - name: Pull dependent repositories
+        run: cd dockerfiles && ./update-sourcecode.sh 
+      - name: Download development docker image
+        uses: actions/download-artifact@v2
+        with:
+          name: dev-image
+      - name: Load development docker image
+        run: cd dockerfiles && docker load -i ../dev-image
       - name: Run unit tests
-        run: cd build/tests && ./run_unit_tests
+        run: |
+          cd dockerfiles
+          docker-compose -f docker-compose-dev.yaml up -d master
+          docker exec master /bin/bash -c "mkdir build; cd build; cmake ..; make all; ./tests/run_unit_tests"
+          docker-compose -f docker-compose-dev.yaml down
