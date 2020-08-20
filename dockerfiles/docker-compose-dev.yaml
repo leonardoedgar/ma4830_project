@@ -10,7 +10,7 @@ services:
         GROUP: ${dGROUP}
         UID: ${dUID}
         GID: ${dGID}
-    image: leonardoedgar/realtime-master
+    image: leonardoedgar/realtime:master-${VERSION}
     container_name: master
     network_mode: "host"
     environment:
