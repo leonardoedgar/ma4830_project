@@ -1,5 +1,5 @@
 # ma4830_project
-![Actions Status](https://github.com/leonardoedgar/ma4830_project/workflows/Continuous%20Integration%20(CI)/badge.svg)
+![Actions Status](https://github.com/leonardoedgar/ma4830_project/workflows/Continuous%20Integration%20(CI)/badge.svg?branch=develop)
 
 NTU MA4830 Realtime Software Project AY20/21
 * Obtain all collision-free mortar's launch configurations given a target and an obstacle. 
