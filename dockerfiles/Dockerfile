@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install programs
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential \ 
-	wget gcc git bundler libssl-dev \
+	wget gcc git libssl-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Build CMake from source
@@ -31,7 +31,3 @@ USER ${USER}
 
 
 WORKDIR ${HOME}
-
-# Install CMock
-COPY --chown=${USER} lib/cmock			lib/cmock
-RUN cd lib/cmock && bundle install
