@@ -1,0 +1,43 @@
+version: '3.3'
+
+services:
+  main:
+    build:
+      context: ..
+      dockerfile: dockerfiles/Dockerfile
+      args:
+        USER: ${dUSER}
+        GROUP: ${dGROUP}
+        UID: ${dUID}
+        GID: ${dGID}
+    image: leonardoedgar/realtime:master-${VERSION}
+    container_name: main
+    network_mode: "host"
+    environment:
+      - DISPLAY=unix$DISPLAY
+    shm_size: 256M
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ../:/home/${dUSER}/
+    stop_signal: SIGINT
+    command: /bin/bash -c "rm -rf build && mkdir build && cd build && cmake .. && make all && ./src/main"
+  tests:
+    build:
+      context: ..
+      dockerfile: dockerfiles/Dockerfile
+      args:
+        USER: ${dUSER}
+        GROUP: ${dGROUP}
+        UID: ${dUID}
+        GID: ${dGID}
+    image: leonardoedgar/realtime:master-${VERSION}
+    container_name: tests
+    network_mode: "host"
+    environment:
+      - DISPLAY=unix$DISPLAY
+    shm_size: 256M
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ../:/home/${dUSER}/
+    stop_signal: SIGINT
+    command: /bin/bash -c "rm -rf build && mkdir build && cd build && cmake .. && make all && ./tests/run_unit_tests"   
