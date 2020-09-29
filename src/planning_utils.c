@@ -47,13 +47,13 @@ FunctionStatus compute_trajectory_angle_to_hit_target(const LaunchConfig *launch
     if (angles[0] < 0 || angles[0] > 180) {
         status.success = false;
         strcpy(status.errorMessage, "");
-        sprintf(status.errorMessage, "Angle computation failed. The angle computed %.2fdeg is beyond the "
+        sprintf(status.errorMessage, "Angle computation failed. The angle computed %.2f deg is beyond the "
                                      "theoretical constraint.", angles[0]);
     }
     else if (angles[1] < 0 || angles[1] > 180) {
         status.success = false;
         strcpy(status.errorMessage, "");
-        sprintf(status.errorMessage, "Angle computation failed. The angle computed %.2fdeg is beyond the "
+        sprintf(status.errorMessage, "Angle computation failed. The angle computed %.2f deg is beyond the "
                                      "theoretical constraint.", angles[1]);
     }
     else {

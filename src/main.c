@@ -30,7 +30,7 @@ int main() {
                     if (fabs(launchConfigArr[index].angle) < FLOATING_POINT_PRECISION && launchConfigArr[index].velocity == 0) {
                         break;
                     }
-                    printf("velocity: %dm/s\t angle: %.6fdeg\n", launchConfigArr[index].velocity,
+                    printf("velocity: %d m/s\t angle: %.2f deg\n", launchConfigArr[index].velocity,
                            launchConfigArr[index].angle);
                 }
             }

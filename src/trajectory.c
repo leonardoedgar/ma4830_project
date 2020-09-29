@@ -35,8 +35,8 @@ int get_augmentation_number(const LaunchConfig* launch, FunctionStatus* status) 
         default: {
             status->success=false;
             strcpy(status->errorMessage, "");
-            sprintf(status->errorMessage, "The augmentation number with the launch speed of %dm/s does not exist.",
-                    launch->velocity);
+            sprintf(status->errorMessage, "The augmentation number with the launch speed of %d m/s "
+                                          "does not exist.", launch->velocity);
             return -1;
         }
     }

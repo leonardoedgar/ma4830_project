@@ -16,7 +16,7 @@ void test_get_augmentation_number() {
     }
     TEST_ASSERT_EQUAL(-1, get_augmentation_number(&launch, &status));
     TEST_ASSERT(!status.success);
-    TEST_ASSERT_EQUAL_STRING("The augmentation number with the launch speed of 135m/s does not exist.",
+    TEST_ASSERT_EQUAL_STRING("The augmentation number with the launch speed of 135 m/s does not exist.",
             status.errorMessage);
 }
 

@@ -43,7 +43,7 @@ void test_compute_trajectory_angle_to_hit_target() {
     distance = -50.5;
     status = compute_trajectory_angle_to_hit_target(&launch, distance, angles);
     TEST_ASSERT_EQUAL(false, status.success);
-    TEST_ASSERT_EQUAL_STRING("Angle computation failed. The angle computed -16.69deg is beyond the "
+    TEST_ASSERT_EQUAL_STRING("Angle computation failed. The angle computed -16.69 deg is beyond the "
                              "theoretical constraint.", status.errorMessage);
 }
 
