@@ -4,18 +4,6 @@
 #include "utils.h"
 
 /**
- * A function to test the trajectory height computed from a given launch config distance from the mortar.
- */
-double test_get_trajectory_height_by_distance() {
-    LaunchConfig launch = create_test_launch_config(37.5, 110);
-    double distance = 20.5;
-    double height = (distance*tan(PI/180*launch.angle)) -
-            (0.5*GRAVITY_ACCEL*pow(distance, 2)/pow(launch.velocity*cos(PI/180*launch.angle), 2));
-    TEST_ASSERT_EQUAL_FLOAT(height, get_trajectory_height_by_distance(&launch, distance));
-}
-
-
-/**
  * A function to test if a trajectory is free from collision.
  */
 void test_is_collision_free_trajectory() {
@@ -45,6 +33,31 @@ void test_compute_trajectory_angle_to_hit_target() {
     TEST_ASSERT_EQUAL(false, status.success);
     TEST_ASSERT_EQUAL_STRING("Angle computation failed. The angle computed -16.69 deg is beyond the "
                              "theoretical constraint.", status.errorMessage);
+}
+
+/**
+ * A function to test that all trajectories that hit the target can be retrieved.
+ */
+void test_get_all_trajectories_that_hit_target_by_speed(){
+    int index;
+    LaunchConfig launchConfigArr[12] = {create_test_launch_config(0, 125),
+                                        create_test_launch_config(0, 115),
+                                        create_test_launch_config(0, 110),
+                                        create_test_launch_config(0, 41),
+                                        create_test_launch_config(0, 30),
+                                        create_test_launch_config(0, 0)};
+    double solutionAngles[] = {2.985433, 87.014567, 3.529759, 86.470241, 3.859854, 86.140146, 37.63689, 52.36311};
+    double solutionVelocities[] = {125, 125, 115, 115, 110, 110, 41, 41};
+    double distance = 165.75;
+    FunctionStatus status = get_all_trajectories_that_hit_target_by_speed(launchConfigArr, 12, distance);
+    TEST_ASSERT_EQUAL(true, status.success);
+    for (index=0; index < 12; index++) {
+        if (launchConfigArr[index].velocity == 0 && fabs(launchConfigArr[index].angle) < FLOATING_POINT_PRECISION) {
+            break;
+        }
+        TEST_ASSERT_EQUAL_INT(solutionVelocities[index], launchConfigArr[index].velocity);
+        TEST_ASSERT_EQUAL_FLOAT(solutionAngles[index], launchConfigArr[index].angle);
+    }
 }
 
 /**

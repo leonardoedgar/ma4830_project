@@ -4,14 +4,6 @@
 #include "data_structure.h"
 
 /**
- * A function to get the trajectory height at a distance from the mortar.
- * @param launchConfig represents the mortar's launch configuration.
- * @param distance represents the distance from the mortar.
- * @return the trajectory height.
- */
-double get_trajectory_height_by_distance(const LaunchConfig *launchConfig, double distance);
-
-/**
  * A function to check if a trajectory is collision-free.
  * @param launchConfig represents the mortar's launch configuration.
  * @param terrain represents the obstacle information.
@@ -28,6 +20,16 @@ bool is_collision_free_trajectory(const LaunchConfig *launchConfig, const Obstac
  */
 FunctionStatus compute_trajectory_angle_to_hit_target(const LaunchConfig *launchConfig, double distance,
                                                       double *angles);
+
+/**
+ * A function to get all trajectories that are feasible to hit the target.
+ * @param launchConfigArr represents the launch configuration whose angle to be computed to hit the target.
+ * @param lengthOfArr represents the length of the launch configuration array.
+ * @param distance of the target from the mortar.
+ * @return the status of the function result.
+ */
+FunctionStatus get_all_trajectories_that_hit_target_by_speed(LaunchConfig* launchConfigArr, int lengthOfArr,
+                                                             double distance);
 
 /**
  * A function to get collision-free trajectories from the launch configurations given.
