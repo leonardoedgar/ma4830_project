@@ -23,7 +23,7 @@ void test_get_augmentation_number() {
 /**
  * A function to test the trajectory height computed from a given launch config distance from the mortar.
  */
-double test_get_trajectory_height_by_distance() {
+void test_get_trajectory_height_by_distance() {
     LaunchConfig launch = create_test_launch_config(37.5, 110);
     double distance = 20.5;
     double height = (distance*tan(PI/180*launch.angle)) -
@@ -32,12 +32,19 @@ double test_get_trajectory_height_by_distance() {
 }
 
 /**
+ * A function to test that the trajectory distance can be obtained.
+ */
+void test_get_trajectory_distance() {
+    LaunchConfig launch = create_test_launch_config(60.0, 125);
+    double distance = pow(launch.velocity, 2)*sin(2*launch.angle*PI/180)/GRAVITY_ACCEL;
+    TEST_ASSERT_EQUAL_FLOAT(distance, get_trajectory_distance(&launch));
+}
+
+/**
  * A function to test that the max distance of a trajectory can be computed.
  */
 void test_get_trajectory_max_distance() {
     LaunchConfig launch = create_test_launch_config(30.0, 115);
     double max_distance = pow(launch.velocity, 2)/GRAVITY_ACCEL;
-    FunctionStatus status;
-    TEST_ASSERT_EQUAL_FLOAT(max_distance, get_trajectory_max_distance(&launch, &status));
-    TEST_ASSERT_EQUAL(true, status.success);
+    TEST_ASSERT_EQUAL_FLOAT(max_distance, get_trajectory_max_distance(&launch));
 }

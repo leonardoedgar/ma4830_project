@@ -7,9 +7,10 @@
 int main() {
     ObstacleInfo terrain;
     double distance;
-    distance = get_user_input(&terrain);
     LaunchConfig launchConfigArr[LAUNCH_CONFIG_ARR_SIZE] = {};
     int validProjectileVelocities[] = {110, 115, 120, 125, 130}, index;
+    print_launch_velocities_table(validProjectileVelocities, 5, 45.0, 5.0, 85.0);
+    distance = get_user_input(&terrain);
     for (index=0; index<5; index++) {
         LaunchConfig launch;
         launch.velocity = validProjectileVelocities[index];
