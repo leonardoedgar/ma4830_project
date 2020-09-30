@@ -55,7 +55,7 @@ make all
 * To run all tests (using docker image)
 ```bash
 cd dockerfiles
-docker-compose up test
+docker-compose up tests
 docker-compose down
 ```
 

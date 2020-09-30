@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
 #include "user_interface.h"
 
 /**
@@ -12,10 +13,13 @@
 double get_positive_float_from_user_input(char* message) {
     bool isUserInputValid = false;
     double number;
+    char userInput[ERROR_MESSAGE_SIZE];
+    char* leftoverBuffer;
     while (!isUserInputValid) {
         printf("%s", message);
-        scanf("%lf", &number);
-        while ((getchar()) != '\n');
+        scanf("%s", userInput);
+        getchar();
+        number = strtod(userInput, &leftoverBuffer);
         if (fabs(number) < FLOATING_POINT_PRECISION || number < 0) {
             printf("Input is not a valid positive floating point number. Retry.\n");
         }
