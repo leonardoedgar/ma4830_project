@@ -11,15 +11,16 @@ void tearDown(void) {
 }
 
 void test_planning_utils() {
-    test_get_trajectory_height_by_distance();
     test_is_collision_free_trajectory();
     test_compute_trajectory_angle_to_hit_target();
+    test_get_all_trajectories_that_hit_target_by_speed();
     test_get_collision_free_trajectories();
 }
 
 void test_trajectory() {
     test_get_augmentation_number();
-    test_get_all_trajectories_that_hit_target_by_speed();
+    test_get_trajectory_height_by_distance();
+    test_get_trajectory_max_distance();
 }
 
 // not needed when using generate_test_runner.rb

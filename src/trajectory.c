@@ -2,7 +2,6 @@
 #include <math.h>
 #include <stdio.h>
 #include "trajectory.h"
-#include "planning_utils.h"
 
 /**
  * A function to get the augmentation number of a mortar's launch configuration.
@@ -43,55 +42,23 @@ int get_augmentation_number(const LaunchConfig* launch, FunctionStatus* status) 
 }
 
 /**
- * A function to get all trajectories that are feasible to hit the target.
- * @param launchConfigArr represents the launch configuration whose angle to be computed to hit the target.
- * @param lengthOfArr represents the length of the launch configuration array.
- * @param distance of the target from the mortar.
- * @return the status of the function result.
+ * A function to get the trajectory height at a distance from the mortar.
+ * @param launchConfig represents the mortar's launch configuration.
+ * @param distance represents the distance from the mortar.
+ * @return the trajectory height.
  */
-FunctionStatus get_all_trajectories_that_hit_target_by_speed(LaunchConfig* launchConfigArr, int lengthOfArr,
-        double distance) {
-    FunctionStatus status;
-    LaunchConfig solutionLaunchConfigArr[lengthOfArr];
-    int index, numSolutionFound=0;
-    double angles[2];
-    for(index=0; index<lengthOfArr; index++) {
-        if (launchConfigArr[index].velocity == 0) {
-            break;
-        }
-        status = compute_trajectory_angle_to_hit_target(&launchConfigArr[index], distance, angles);
-        if (!status.success) {
-            printf("%s", status.errorMessage);
-        }
-        else if (fabs(angles[1]-angles[0]) > FLOATING_POINT_PRECISION) {
-            LaunchConfig feasibleLaunchOne, feasibleLaunchTwo;
-            feasibleLaunchOne.velocity = launchConfigArr[index].velocity;
-            feasibleLaunchOne.angle = angles[0];
-            feasibleLaunchTwo.velocity = launchConfigArr[index].velocity;
-            feasibleLaunchTwo.angle = angles[1];
-            solutionLaunchConfigArr[numSolutionFound] = feasibleLaunchOne;
-            solutionLaunchConfigArr[numSolutionFound+1] = feasibleLaunchTwo;
-            numSolutionFound += 2;
-        }
-        else if (fabs(angles[1] - angles[0]) <= FLOATING_POINT_PRECISION) {
-            LaunchConfig feasibleLaunch;
-            feasibleLaunch.velocity = launchConfigArr[index].velocity;
-            feasibleLaunch.angle = angles[0];
-            solutionLaunchConfigArr[numSolutionFound] = feasibleLaunch;
-            numSolutionFound += 1;
-        }
-    }
-    index=0;
-    if (numSolutionFound != 0) {
-        for (index=0; index<numSolutionFound; index++) {
-            launchConfigArr[index] = solutionLaunchConfigArr[index];
-        }
-    }
-    LaunchConfig launch;
-    launch.velocity = 0;
-    launch.angle = 0.0;
-    launchConfigArr[index] = launch;
-    status.success = true;
-    strcpy(status.errorMessage, "");
-    return status;
+double get_trajectory_height_by_distance(const LaunchConfig *launchConfig, double distance) {
+    return (distance*tan(PI/180*launchConfig->angle)) -
+           (0.5*GRAVITY_ACCEL*pow(distance, 2)/pow(launchConfig->velocity*cos(PI/180*launchConfig->angle), 2));
+}
+
+/**
+ * A function to get the trajectory maximum distance.
+ * @param launchConfig represents the mortar's launch configuration.
+ * @param status represents the status of the function.
+ * @return the maximum distance of the trajectory.
+ */
+double get_trajectory_max_distance(const LaunchConfig* launchConfig, FunctionStatus* status) {
+    status->success = true;
+    return pow(launchConfig->velocity, 2)/GRAVITY_ACCEL;
 }

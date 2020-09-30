@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 #include "user_interface.h"
-#include "trajectory.h"
 #include "planning_utils.h"
 #define LAUNCH_CONFIG_ARR_SIZE 11
 
@@ -22,7 +21,7 @@ int main() {
         status = get_collision_free_trajectories(launchConfigArr, LAUNCH_CONFIG_ARR_SIZE, &terrain);
         if (status.success) {
             if (fabs(launchConfigArr[0].angle) < FLOATING_POINT_PRECISION && launchConfigArr[0].velocity == 0) {
-                printf("There is not any feasible configurations to hit the target.\n");
+                printf("There is no any feasible configurations to hit the target.\n");
             }
             else {
                 printf("Here are all possible configurations to hit the target.\n");
