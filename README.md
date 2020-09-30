@@ -70,5 +70,6 @@ make all
 ## 5. Acknowledgments
 
 Great thanks to people who have worked or helped on this project
-
+* [He Zhanxin](https://github.com/HoraN1)
 * [Tao Shuailin](https://github.com/MENGH1)
+* [Yuet Choon](https://github.com/yuetchoon)
