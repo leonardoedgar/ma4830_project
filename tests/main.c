@@ -20,6 +20,7 @@ void test_planning_utils() {
 void test_trajectory() {
     test_get_augmentation_number();
     test_get_trajectory_height_by_distance();
+    test_get_trajectory_distance();
     test_get_trajectory_max_distance();
 }
 

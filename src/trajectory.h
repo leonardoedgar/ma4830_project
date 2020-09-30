@@ -19,10 +19,16 @@ int get_augmentation_number(const LaunchConfig* launch, FunctionStatus* status);
 double get_trajectory_height_by_distance(const LaunchConfig *launchConfig, double distance);
 
 /**
+ * A function to get the trajectory distance.
+ * @param launchConfig represents the mortar's launch configuration.
+ * @return the distance of the trajectory.
+ */
+double get_trajectory_distance(const LaunchConfig* launchConfig);
+
+/**
  * A function to get the trajectory maximum distance.
  * @param launchConfig represents the mortar's launch configuration.
- * @param status represents the status of the function.
  * @return the maximum distance of the trajectory.
  */
-double get_trajectory_max_distance(const LaunchConfig* launchConfig, FunctionStatus* status);
+double get_trajectory_max_distance(const LaunchConfig* launchConfig);
 #endif

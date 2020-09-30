@@ -53,12 +53,23 @@ double get_trajectory_height_by_distance(const LaunchConfig *launchConfig, doubl
 }
 
 /**
+ * A function to get the trajectory distance.
+ * @param launchConfig represents the mortar's launch configuration.
+ * @return the distance of the trajectory.
+ */
+double get_trajectory_distance(const LaunchConfig* launchConfig) {
+    return pow(launchConfig->velocity, 2)*sin(2*launchConfig->angle*PI/180)/GRAVITY_ACCEL;
+}
+
+
+/**
  * A function to get the trajectory maximum distance.
  * @param launchConfig represents the mortar's launch configuration.
- * @param status represents the status of the function.
  * @return the maximum distance of the trajectory.
  */
-double get_trajectory_max_distance(const LaunchConfig* launchConfig, FunctionStatus* status) {
-    status->success = true;
-    return pow(launchConfig->velocity, 2)/GRAVITY_ACCEL;
+double get_trajectory_max_distance(const LaunchConfig* launchConfig) {
+    LaunchConfig launch;
+    launch.velocity = launchConfig->velocity;
+    launch.angle = 45.0;
+    return get_trajectory_distance(&launch);
 }

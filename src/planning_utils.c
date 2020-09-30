@@ -31,7 +31,7 @@ bool is_collision_free_trajectory(const LaunchConfig *launchConfig, const Obstac
 FunctionStatus compute_trajectory_angle_to_hit_target(const LaunchConfig *launchConfig, double distance,
         double *angles) {
     FunctionStatus status;
-    double max_distance = get_trajectory_max_distance(launchConfig, &status);
+    double max_distance = get_trajectory_max_distance(launchConfig);
     if (max_distance < distance) {
         status.success = false;
         strcpy(status.errorMessage, "");
