@@ -31,22 +31,30 @@ bool is_collision_free_trajectory(const LaunchConfig *launchConfig, const Obstac
 FunctionStatus compute_trajectory_angle_to_hit_target(const LaunchConfig *launchConfig, double distance,
         double *angles) {
     FunctionStatus status;
-    angles[0] = asin(distance*GRAVITY_ACCEL/pow(launchConfig->velocity, 2))/2*180/PI;
-    angles[1] = 90 - angles[0];
-    if (angles[0] < 0 || angles[0] > 180) {
+    double max_distance = get_trajectory_max_distance(launchConfig, &status);
+    if (max_distance < distance) {
         status.success = false;
         strcpy(status.errorMessage, "");
-        sprintf(status.errorMessage, "Angle computation failed. The angle computed %.2f deg is beyond the "
-                                     "theoretical constraint.", angles[0]);
-    }
-    else if (angles[1] < 0 || angles[1] > 180) {
-        status.success = false;
-        strcpy(status.errorMessage, "");
-        sprintf(status.errorMessage, "Angle computation failed. The angle computed %.2f deg is beyond the "
-                                     "theoretical constraint.", angles[1]);
     }
     else {
-        status.success = true;
+        angles[0] = asin(distance*GRAVITY_ACCEL/pow(launchConfig->velocity, 2))/2*180/PI;
+        angles[1] = 90 - angles[0];
+
+        if (angles[0] < 0 || angles[0] > 180) {
+            status.success = false;
+            strcpy(status.errorMessage, "");
+            sprintf(status.errorMessage, "Angle computation failed. The angle computed %.2f deg is beyond the "
+                                         "theoretical constraint.", angles[0]);
+        }
+        else if (angles[1] < 0 || angles[1] > 180) {
+            status.success = false;
+            strcpy(status.errorMessage, "");
+            sprintf(status.errorMessage, "Angle computation failed. The angle computed %.2f deg is beyond the "
+                                         "theoretical constraint.", angles[1]);
+        }
+        else {
+            status.success = true;
+        }
     }
     return status;
 }
