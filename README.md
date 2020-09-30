@@ -9,11 +9,11 @@ Owner: Leonardo Edgar (leonardo_edgar98@outlook.com)
 
 ## Table of Contents
 
-   1. [Getting started](#markdown-header-1-getting-started)
-   2. [Prerequisites](#markdown-header-2-prerequisites)
-   3. [Installing](#markdown-header-3-installing)
-   4. [Run](#markdown-header-4-run)
-   5. [Acknowledgments](#markdown-header-5-acknowledgments)
+   1. [Getting started](#1-getting-started)
+   2. [Prerequisites](#2-prerequisites)
+   3. [Installing](#3-installing)
+   4. [Run](#4-run)
+   5. [Acknowledgments](#5-acknowledgments)
 
 ## 1. Getting started
 
