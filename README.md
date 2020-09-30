@@ -2,6 +2,7 @@
 ![Actions Status](https://github.com/leonardoedgar/ma4830_project/workflows/Continuous%20Integration%20(CI)/badge.svg?branch=develop)
 
 NTU MA4830 Realtime Software Project AY20/21
+* Print a formatted table of mortar's launch configurations vs projectile's range and projectile's maximum height.
 * Obtain all collision-free mortar's launch configurations given a target and an obstacle. 
 
 Owner: Leonardo Edgar (leonardo_edgar98@outlook.com)
