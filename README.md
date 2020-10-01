@@ -25,7 +25,8 @@ Welcome to **MA4830 Realtime Software** project! There are just a few steps to g
     * Any computer
 2. Software package (for non-docker user)
     * gcc >= 7.5.0
-    * CMake >= 3.18.1
+    * cmake >= 3.18.1
+    * make >= 4.1
 
 ## 3. Installing
 
