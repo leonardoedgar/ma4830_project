@@ -22,8 +22,11 @@ double get_positive_float_from_user_input(char* message) {
         scanf("%s", userInput);
         getchar();
         number = strtod(userInput, &leftoverBuffer);
-        if (fabs(number) < FLOATING_POINT_PRECISION || number < 0) {
-            printf("Input is not a valid positive floating point number. Retry.\n");
+        if (fabs(number) < FLOATING_POINT_PRECISION || *leftoverBuffer) {
+            printf("Input is not a number. Retry.\n");
+        }
+        else if (number < 0) {
+            printf("Input is not a positive number. Retry.\n");
         }
         else {
             isUserInputValid=true;
