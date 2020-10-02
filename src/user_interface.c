@@ -1,3 +1,15 @@
+/**********************************************************************
+ * This file is used to print out messages on screen asking for user
+ * input and corresponding error messages for invalid input. 
+ * 
+ * It contains functions:
+ *      double get_positive_float_from_user_input(char *message)
+ *      double get_user_input(ObstacleInfo *obstacle)
+ * 
+ * Authors: Tao Shuailin, Leonador Edgar, He Zhanxin
+ * 
+ **********************************************************************/
+
 #include <stdbool.h>
 #include <math.h>
 #include <stdio.h>

@@ -1,3 +1,22 @@
+/**********************************************************************
+ * This file is used to calculate all the possible collision free 
+ * trajectories with distance of target and distance, height 
+ * information of terrian given.
+ * 
+ * It contains functions:
+ *      bool is_collision_free_trajectory(const LaunchConfig *launchConfig, 
+ *          const ObstacleInfo *terrain)
+ *      FunctionStatus compute_trajectory_angle_to_hit_target(
+ *          const LaunchConfig *launchConfig, double distance,double *angles)
+ *      FunctionStatus get_all_trajectories_that_hit_target_by_speed(
+ *          LaunchConfig* launchConfigArr, int lengthOfArr, double distance)
+ *      FunctionStatus get_collision_free_trajectories(LaunchConfig *launchConfigArr, 
+ *          int lengthOfArr, const ObstacleInfo *terrain)
+ * 
+ * Authors: Tao Shuailin, Leonador Edgar, Yuet Choon, He Zhanxin
+ * 
+ **********************************************************************/
+
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
