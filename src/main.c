@@ -1,3 +1,20 @@
+/**********************************************************************
+ * This is the main program. The workflow is listed below:
+ *      1. Print a table containing maximum range and height for diffrent 
+ *         launching configuration (Augmentations);
+ *      2. Ask user input of target distance, the existence of terrian and
+ *         distance, height of it (Four values).
+ *      3. Print out all possible combinations of launching speed and angles
+ *         indicated with augmentation numbers. 
+ * 
+ * It contains functions:
+ *      double get_positive_float_from_user_input(char *message)
+ *      double get_user_input(ObstacleInfo *obstacle)
+ * 
+ * Authors: Tao Shuailin, Leonardo Edgar, Yuet Choon, He Zhanxin
+ * 
+ **********************************************************************/
+
 #include <stdio.h>
 #include <math.h>
 #include "user_interface.h"

@@ -1,3 +1,20 @@
+/**********************************************************************
+ * This file is used to calculate all the possible collision free 
+ * trajectories with distance of target and distance, height 
+ * information of terrian given.
+ * 
+ * It contains functions:
+ *      int get_augmentation_number(const LaunchConfig* launch, 
+ *          FunctionStatus* status)
+ *      double get_trajectory_height_by_distance(
+ *          const LaunchConfig *launchConfig, double distance)
+ *      double get_trajectory_distance(const LaunchConfig* launchConfig)
+ *      double get_trajectory_max_distance(const LaunchConfig* launchConfig)
+ * 
+ * Authors: Tao Shuailin, Leonardo Edgar, Yuet Choon, He Zhanxin
+ * 
+ **********************************************************************/
+
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
