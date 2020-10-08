@@ -13,7 +13,7 @@
  *      FunctionStatus get_collision_free_trajectories(LaunchConfig *launchConfigArr, 
  *          int lengthOfArr, const ObstacleInfo *terrain)
  * 
- * Authors: Tao Shuailin, Leonador Edgar, Yuet Choon, He Zhanxin
+ * Authors: Tao Shuailin, Leonardo Edgar, Yuet Choon, He Zhanxin
  * 
  **********************************************************************/
 

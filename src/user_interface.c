@@ -6,7 +6,7 @@
  *      double get_positive_float_from_user_input(char *message)
  *      double get_user_input(ObstacleInfo *obstacle)
  * 
- * Authors: Tao Shuailin, Leonador Edgar, He Zhanxin
+ * Authors: Tao Shuailin, Leonardo Edgar, He Zhanxin
  * 
  **********************************************************************/
 

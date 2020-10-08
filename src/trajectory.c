@@ -11,7 +11,7 @@
  *      double get_trajectory_distance(const LaunchConfig* launchConfig)
  *      double get_trajectory_max_distance(const LaunchConfig* launchConfig)
  * 
- * Authors: Tao Shuailin, Leonador Edgar, Yuet Choon, He Zhanxin
+ * Authors: Tao Shuailin, Leonardo Edgar, Yuet Choon, He Zhanxin
  * 
  **********************************************************************/
 
